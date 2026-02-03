@@ -2,6 +2,7 @@ import os
 
 import django
 
+import buttons
 from const import bot
 from menu import menu
 
@@ -19,7 +20,8 @@ def reg_step_3(message, chat_id, name, address):
             address=address,
             phone=phone
         )
-        menu(chat_id=chat_id)
+        text = 'Продолжая использовать бота, ты соглашаешься с <a href="https://docs.google.com/document/d/1ARzDxdv8pvQgUcCk9wWWHTsNqPa-4MS3v0wWnaqI18Q/edit?usp=sharing">условиями использования</a> 📜✔️'
+        bot.send_message(chat_id=chat_id, text=text, reply_markup=buttons.approve(), parse_mode='HTML', disable_web_page_preview=True)
     else:
         msg = bot.send_message(chat_id=chat_id, text='Введите ваше имя')
         bot.register_next_step_handler(msg, reg_step_3, chat_id, name, address)

@@ -66,3 +66,10 @@ def rating(order_id):
     star5 = InlineKeyboardButton('⭐⭐️⭐️⭐️⭐️️', callback_data=f'rating|5|{order_id}')
     markup.add(star1, star2, star3, star4, star5)
     return markup
+
+
+def approve():
+    markup = InlineKeyboardMarkup(row_width=1)
+    menu = InlineKeyboardButton('✅Принимаю✅', callback_data='menu')
+    markup.add(menu)
+    return markup

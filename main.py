@@ -19,13 +19,16 @@ User.objects.all().delete()
 Order.objects.all().delete()
 
 def check_subscribe(chat_id):
-    chat_member = bot.get_chat_member(channel_id, chat_id).status
-    if chat_member in ['member', 'creator']:
+    try:
+        chat_member = bot.get_chat_member(channel_id, chat_id).status
+        if chat_member in ['member', 'creator']:
+            return True
+        else:
+            bot.send_message(text='Для продолжения работы бота подпишитесь на канал', chat_id=chat_id,
+                             reply_markup=buttons.subscribe())
+            return False
+    except Exception:
         return True
-    else:
-        bot.send_message(text='Для продолжения работы бота подпишитесь на канал', chat_id=chat_id,
-                         reply_markup=buttons.subscribe())
-        return False
 
 
 @bot.message_handler(commands=['start'])
